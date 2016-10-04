@@ -1,6 +1,6 @@
 {
   "name": "react-generic-slider",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Generic Slider component for React",
   "main": "lib/slider.js",
   "keywords": [
@@ -15,7 +15,7 @@
     "slider",
     "component"
   ],
-  "author": "Azim Gadzhiagayev <me@azimgd.com>",
+  "author": "Jesse Jurman <j.r.jurman@gmail.com>",
   "license": "MIT",
   "scripts": {
     "compile": "babel -d lib/ src/"

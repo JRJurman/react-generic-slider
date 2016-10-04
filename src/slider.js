@@ -6,7 +6,6 @@ class Slider extends React.Component {
 
     this.scrollLeft = this.scrollLeft.bind(this);
     this.scrollRight = this.scrollRight.bind(this);
-    this.updatePosition = this.updatePosition.bind(this);
     this.setVisibleItems = this.setVisibleItems.bind(this);
     this.sliderStyle = this.sliderStyle.bind(this);
     this.isOpaque = this.isOpaque.bind(this);
@@ -30,31 +29,38 @@ class Slider extends React.Component {
   }
 
   scrollLeft() {
-    this.updatePosition(this.state.currentPosition - 1);
+    const end = this.props.children.length - this.props.visibleItems;
+    const beginning = 0;
+
+    if (this.props.isInfinite && (this.state.currentPosition == beginning)) {
+      this.setState({currentPosition: end});
+    } else {
+      if ((this.state.currentPosition - this.props.slidesToScroll) > beginning) {
+        this.setState({currentPosition: this.state.currentPosition - this.props.slidesToScroll});
+      }
+      else {
+        this.setState({currentPosition: beginning});
+      }
+    }
     this.animate();
   }
 
   scrollRight() {
-    this.updatePosition(this.state.currentPosition + 1);
+    const end = this.props.children.length - this.props.visibleItems;
+    const beginning = 0;
+
+    if (this.props.isInfinite && (this.state.currentPosition == end)) {
+      this.setState({currentPosition: beginning});
+    } else {
+      // if we're not at the end, and moving forward wouldn't put us after the end
+      if ((this.state.currentPosition + this.props.slidesToScroll) < end) {
+        this.setState({currentPosition: this.state.currentPosition + this.props.slidesToScroll});
+      }
+      else {
+        this.setState({currentPosition: end});
+      }
+    }
     this.animate();
-  }
-
-  updatePosition(position) {
-    const whole = position + this.state.visibleItems;
-
-    if (this.props.isInfinite && position < 0) {
-      this.setState({ currentPosition: whole });
-    }
-
-    if (this.props.isInfinite && whole > this.props.children.length) {
-      this.setState({ currentPosition: 0 });
-    }
-
-    if (whole > this.props.children.length || position < 0) {
-      return;
-    }
-
-    this.setState({ currentPosition: position });
   }
 
   calculateShift(offset, amount) {
@@ -129,8 +135,9 @@ class Slider extends React.Component {
 
 Slider.defaultProps = {
   isInfinite: true,
+  slidesToScroll: 1,
   delay: 5000,
-  visibleItems: 4,
+  visibleItems: 4
 };
 
 export default Slider;
