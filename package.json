@@ -1,8 +1,8 @@
 {
-  "name": "react-image-slider",
-  "version": "0.0.6",
-  "description": "Image slider component for React",
-  "main": "lib/image-slider.js",
+  "name": "react-generic-slider",
+  "version": "0.0.1",
+  "description": "Generic Slider component for React",
+  "main": "lib/slider.js",
   "keywords": [
     "react-component",
     "react",
@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/azimgd/react-image-slider.git"
+    "url": "https://github.com/JRJurman/react-simple-carousel"
   },
   "dependencies": {
     "react": "^15.1"

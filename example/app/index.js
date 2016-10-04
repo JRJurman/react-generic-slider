@@ -1,4 +1,4 @@
-import '../../src/image-slider.css';
+import '../../src/slider.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';

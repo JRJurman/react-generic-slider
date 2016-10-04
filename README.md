@@ -1,35 +1,33 @@
-# React image slider
-Responsive, css transitions based image slider/gallery/carousel for react.js
+# React Generic Slider
+Responsive, css transitions based slider/gallery/carousel for react.js
+Based on https://github.com/azimgd/react-image-slider
 
 ![](https://github.com/azimgd/react-image-slider/blob/master/docs/slider.gif?raw=true)
 
 ## Installation
 
 ```
-npm install react-image-slider
+npm install react-generic-slider
 ```
 
-and add css file from `./node_modules/react-image-slider/lib/image-slider.css`
+and add css file from `./node_modules/react-generic-slider/lib/slider.css`
 
 ## Example
 
 ```javascript
 import React from 'react';
-import Slider from 'react-image-slider';
+import Slider from 'react-simple-carousel';
 
 export default React.createClass({
   render() {
-    const images = [
-      '//placehold.it/600/1abc9c',
-      '//placehold.it/600/3498db',
-      '//placehold.it/600/2ecc71',
-      '//placehold.it/600/9b59b6',
-      '//placehold.it/600/f1c40f',
-      '//placehold.it/600/e74c3c',
-      '//placehold.it/600/e67e22',
-    ];
-
-    return <Slider images={images} isInfinite={true} delay={5000}/>;
+    return (<Slider isInfinite={true} delay={5000}>
+      <div> <img src={"https://placekitten.com/500/500"}/> </div>
+      <div> <img src={"https://placekitten.com/501/500"}/> </div>
+      <div> <img src={"https://placekitten.com/502/500"}/> </div>
+      <div> <img src={"https://placekitten.com/503/500"}/> </div>
+      <div> <img src={"https://placekitten.com/504/500"}/> </div>
+      <div> <img src={"https://placekitten.com/505/500"}/> </div>
+    </Slider>);
   }
 });
 ```

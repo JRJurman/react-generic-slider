@@ -13,7 +13,6 @@ class Slider extends React.Component {
     this.animate = this.animate.bind(this);
 
     this.state = {
-      images: [],
       currentPosition: 0,
       interval: null
     };
@@ -24,13 +23,6 @@ class Slider extends React.Component {
     this.setVisibleItems(this.props.visibleItems);
 
     window.addEventListener('resize', this.setVisibleItems.bind(this, this.props.visibleItems));
-  }
-
-  componentWillMount() {
-    const images = (this.props.images || []).map((image, count) => {
-      return image + `?rscver${count}`;
-    });
-    this.setState({images});
   }
 
   componentWillUnmount() {
@@ -54,11 +46,11 @@ class Slider extends React.Component {
       this.setState({ currentPosition: whole });
     }
 
-    if (this.props.isInfinite && whole > this.state.images.length) {
+    if (this.props.isInfinite && whole > this.props.children.length) {
       this.setState({ currentPosition: 0 });
     }
 
-    if (whole > this.state.images.length || position < 0) {
+    if (whole > this.props.children.length || position < 0) {
       return;
     }
 
@@ -90,9 +82,9 @@ class Slider extends React.Component {
 
   isOpaque(key) {
     const nextPosition = this.state.visibleItems + this.state.currentPosition;
-    const opaque = this.state.images.slice(this.state.currentPosition, nextPosition);
+    const opaque = this.props.children.slice(this.state.currentPosition, nextPosition);
 
-    return opaque.indexOf(this.state.images[key]) !== -1;
+    return opaque.indexOf(this.props.children[key]) !== -1;
   }
 
   animate() {
@@ -110,21 +102,21 @@ class Slider extends React.Component {
 
   render() {
     const sliderStyle = this.sliderStyle('rsc-slider-item');
-    const { images, visibleItems } = this.state;
+    const { visibleItems } = this.state;
 
     return (
       <div className="rsc-container">
         <div className="rsc-slider" style={sliderStyle}>
-          {images.map((item, key) => {
+          {this.props.children.map((item, key) => {
             const itemClass = this.isOpaque(key) ? 'rsc-slider-item' : 'rsc-slider-item rsc-slider-item_transparent';
             const imgWidth = 100 / visibleItems;
 
-            return <div className={itemClass} key={key} style={{'flex': `0 0 ${imgWidth}%`}}>
-              <img src={item} className="rsc-slider-item-img" />
-            </div>
+            return (<div className={itemClass} key={key} style={{'flex': `0 0 ${imgWidth}%`}}>
+              {item}
+            </div>);
           })}
         </div>
-        {images.length > visibleItems ?
+        {this.props.children.length > visibleItems ?
           <div>
             <div className="rsc-navigation rsc-navigation_left rsc-arrow_left" onClick={this.scrollLeft}></div>
             <div className="rsc-navigation rsc-navigation_right rsc-arrow_right" onClick={this.scrollRight}></div>
