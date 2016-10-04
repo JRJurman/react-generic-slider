@@ -18,7 +18,8 @@
   "author": "Jesse Jurman <j.r.jurman@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "compile": "babel -d lib/ src/"
+    "compile": "babel -d lib/ src/",
+    "postcompile": "cp src/slider.css lib/"
   },
   "repository": {
     "type": "git",
