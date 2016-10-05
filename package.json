@@ -1,8 +1,9 @@
 {
   "name": "react-generic-slider",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "description": "Generic Slider component for React",
   "main": "lib/slider.js",
+  "files": ["lib"],
   "keywords": [
     "react-component",
     "react",
